@@ -6,9 +6,12 @@ This project builds an end-to-end data pipeline that transforms raw electricity 
 
 It demonstrates practical experience in data engineering and analytics, integrating **Python, SQL, and Power BI** to deliver a complete solution from ingestion to reporting.
 
+## 🌍 Geographic Dashboard
 
 <p align="center">
-  <img src="https://github.com/oyeniyi-the-analyst/Energy-market-analytics/blob/main/Dashboards/executive_overview.png?raw=true" width="800"/>
+  <img src="https://github.com/oyeniyi-the-analyst/Energy-market-analytics/blob/main/visuals/geographic_dashboard.png?raw=true" width="800"/>
+  <br>
+  <em>Geospatial analysis of electricity demand, pricing, and regional trends</em>
 </p>
 ---
 
