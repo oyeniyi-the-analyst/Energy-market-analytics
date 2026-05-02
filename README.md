@@ -1,195 +1,178 @@
-# ⚡ Energy Market Analytics (ETL Pipeline)
+# ⚡ Energy Market Analytics (Enterprise ETL Pipeline)
 
-End-to-end **enterprise-style data engineering pipeline** for large-scale energy market data using **Python (Jupyter Notebooks) + MySQL**.
+## 📌 Overview
 
----
+This project builds an end-to-end data pipeline that transforms raw electricity demand, pricing, and weather datasets into a structured, analytics-ready data warehouse.
 
-## 🚀 Overview
-
-This project demonstrates the design and optimisation of a **scalable ETL pipeline** capable of processing **multi-million row datasets** efficiently using chunking, streaming, and data warehousing techniques.
-
-> ⚠️ Note: This project builds on existing ETL patterns and scripts, which were **adapted, extended, and optimised** for large-scale energy data processing, performance, and reliability.
+It demonstrates practical experience in data engineering and analytics, integrating **Python, SQL, and Power BI** to deliver a complete solution from ingestion to reporting.
 
 ---
 
-## 🧠 Architecture
+## 🏗️ Architecture
+Raw CSV Data
+↓
+Python: Chunking & Unpivoting
+↓
+MySQL Staging Layer (stg_)
+↓
+Streaming → Clean Layer (tmp_cleaned_)
+↓
+Dimensional Model (dim_)
+↓
+Fact Tables (fact_)
+↓
+Power BI Dashboard
 
-```
-Raw CSVs
-   ↓
-Chunking (Notebook)
-   ↓
-Staging Tables (MySQL)
-   ↓
-Cleaned Layer (tmp tables)
-   ↓
-Fact Tables (Star Schema)
-   ↓
-Diagnostics & Audit Reports
-```
-
----
-
-## 🛠️ Tech Stack
-
-* Python (pandas, csv, pymysql, mysql.connector)
-* Jupyter Notebooks
-* MySQL (InnoDB, LOAD DATA INFILE)
-* Data Warehousing (Star Schema)
-* ETL Design Patterns (chunking, streaming, batching)
 
 ---
 
-## 📓 Notebooks (Pipeline Breakdown)
+## ⚙️ Tech Stack
 
-### 🔹 Data Preparation
-
-* **chunk_demand_and_price.ipynb**
-  Splits large datasets into **500K row chunks** for memory-efficient processing.
-
-* **chunk_unpivoted_weather.ipynb**
-  Further chunks transformed weather datasets for scalable ingestion.
+- **Python** (Pandas, PyMySQL, MySQL Connector)
+- **MySQL** (Relational Data Warehouse)
+- **SQL** (Data transformation & modelling)
+- **Power BI** (Visualisation & DAX)
+- **Jupyter Notebooks** (Pipeline execution)
 
 ---
 
-### 🔹 Transformation
+## 🔥 Key Features
 
-* **etl_unpivot_weather.ipynb**
-  Converts wide weather data into normalized format using `pandas.melt()` and separates numeric/text values.
+### 📊 Scalable Data Processing
+- Processed large datasets using **chunking (500,000 rows per batch)**
+- Implemented memory-efficient ingestion workflows
+- Streamed data incrementally into MySQL
 
----
+### 🔄 Data Transformation
+- Unpivoted wide-format weather datasets into analytical structure
+- Standardised datetime formats and country identifiers
+- Cleaned and validated raw data prior to loading
 
-### 🔹 Staging Layer (High-Speed Ingestion)
+### 🏗️ Multi-Stage ETL Pipeline
+- **Staging Layer (stg_*)** → raw ingestion
+- **Clean Layer (tmp_cleaned_*)** → validated structured data
+- **Warehouse Layer (dim_*, fact_*)** → analytics-ready model
 
-* **chunks_to_staging_multi_stream_loader.ipynb**
-  Streams chunked files into MySQL using `LOAD DATA LOCAL INFILE` with throughput tracking.
+### 🧩 Dimensional Data Modelling
+Star schema design:
+- `fact_demand`
+- `fact_price`
+- `dim_time`
+- `dim_country`
+- `dim_city`
 
----
+Implemented:
+- Primary & foreign keys
+- Indexing for performance
+- Deduplication rules
 
-### 🔹 Cleaned Layer
+### 🚀 Streaming & Incremental Loading
+- Chunk-based processing for large-scale ingestion
+- Incremental loading using `raw_id`
+- Optimised batch inserts for performance
 
-* **MULTI-STREAM LOADER (stg → tmp_cleaned).ipynb**
-  Transforms staging data into structured format with:
+### 🧪 Data Quality & Validation
+- Row count reconciliation across pipeline layers
+- Detected:
+  - Missing timestamps
+  - Invalid country mappings
+  - Duplicate records
+- SQL-based validation and diagnostic checks
 
-  * timestamp parsing
-  * ISO code normalization
-  * hash-based deduplication
-  * incremental streaming via `raw_id`
-
----
-
-### 🔹 Fact Table Load
-
-* **fact_tables_loader.ipynb**
-  Loads fact tables using:
-
-  * batch inserts
-  * in-memory dimension lookups (dictionary mapping)
-  * referential integrity checks
-
----
-
-### 🔹 Enterprise Pipeline (Final System)
-
-* **FINAL ENTERPRISE ETL FACT LOADER + DIAGNOSTIC CSV MODULE (INTEGRATED).ipynb**
-  Fully integrated pipeline with:
-
-  * progress tracking (rows/sec, ETA)
-  * batch + pipeline metadata
-  * data quality diagnostics (invalid keys, duplicates, missing timestamps)
-  * CSV audit outputs
-
----
-
-### 🔹 Streaming Optimisation
-
-* **stream_demand_and_price.ipynb**
-  Implements efficient streaming logic for large datasets and incremental loads.
-
----
-
-## 📊 Data Model
-
-### Fact Tables
-
-* `fact_demand`
-* `fact_price`
-
-### Dimensions
-
-* `dim_time`
-* `dim_country`
-
----
-
-## ⚡ Performance & Optimisation
-
-* Chunking (**500K rows per file**)
-* Streaming ingestion (no full dataset loads in memory)
-* Dictionary-based joins (**O(1) lookups**)
-* Bulk inserts (`executemany`)
-* Incremental loading via `raw_id`
-* Throughput monitoring (rows/sec, ETA)
-
----
-
-## 🔐 Data Engineering Features
-
-* Batch tracking (`batch_id`)
-* Pipeline versioning (`pipeline_id`)
-* Idempotent loads (`INSERT IGNORE`)
-* Data quality validation layer
-* Audit logging + CSV diagnostics
-* Error handling & recovery patterns
+### ⚡ Performance Optimisation
+- Used `LOAD DATA INFILE` for bulk ingestion
+- Indexed key columns for query performance
+- Monitored throughput and pipeline efficiency
 
 ---
 
 ## 📂 Project Structure
+Energy-market-analytics/
+│
+├── Notebooks/
+│ ├── chunk_demand_and_price.ipynb
+│ ├── chunk_unpivoted_weather.ipynb
+│ ├── chunks_to_staging_multi_stream_loader.ipynb
+│ ├── etl_unpivot_weather.ipynb
+│ ├── stream_demand_and_price.ipynb
+│ ├── MULTI-STREAM LOADER (stg → tmp_cleaned).ipynb
+│ ├── fact_tables_loader.ipynb
+│ └── FINAL ENTERPRISE ETL FACT LOADER + DIAGNOSTIC CSV MODULE (INTEGRATED).ipynb
+│
+├── sql/
+│ ├── 3.1_schema_create.sql
+│ ├── 3.2_staging_load.sql
+│ ├── 3.3_transform_dim.sql
+│ ├── 3.4_facts_load.sql
+│ └── 4.1_validation_tests.sql
+│
+├── data/ (excluded – large datasets)
+└── README.md
 
-```
-notebooks/
-  ├── chunk_demand_and_price.ipynb
-  ├── chunk_unpivoted_weather.ipynb
-  ├── chunks_to_staging_multi_stream_loader.ipynb
-  ├── etl_unpivot_weather.ipynb
-  ├── fact_tables_loader.ipynb
-  ├── FINAL ENTERPRISE ETL FACT LOADER + DIAGNOSTIC CSV MODULE (INTEGRATED).ipynb
-  ├── MULTI-STREAM LOADER (stg → tmp_cleaned).ipynb
-  ├── stream_demand_and_price.ipynb
-
-data/
-  ├── demand_chunks/
-  ├── price_chunks/
-  ├── weather_chunks/
-
-etl_diagnostics/
-```
-
----
-
-## ▶️ How to Run
-
-Execute notebooks in order:
-
-1. Chunk raw datasets
-2. Unpivot weather data
-3. Load staging tables
-4. Transform to cleaned layer
-5. Load fact tables
-6. Run final pipeline with diagnostics
 
 ---
 
-## 🧩 Key Takeaways
+## 🔄 Pipeline Breakdown
 
-* Designed and optimised a **scalable ETL pipeline**
-* Worked with **large, real-world datasets**
-* Applied **data warehousing principles (star schema)**
-* Implemented **streaming + chunk-based processing**
-* Added **observability (logging, metrics, diagnostics)**
+### 1. Data Preparation (Python)
+- Chunked large CSV files into manageable parts
+- Unpivoted weather datasets using Pandas
+- Prepared structured files for database ingestion
+
+### 2. Staging Layer (MySQL)
+- Loaded raw data into `stg_*` tables
+- Applied initial validation, deduplication, and indexing
+
+### 3. Transformation Layer
+- Streamed data into `tmp_cleaned_*` tables
+- Applied:
+  - Type conversions
+  - Data standardisation
+  - Hash-based tracking
+
+### 4. Dimensional Modelling
+- Built reusable dimensions:
+  - Time
+  - Country
+  - City
+- Unified multiple data sources into a consistent schema
+
+### 5. Fact Table Loading
+- Populated:
+  - `fact_demand`
+  - `fact_price`
+- Enforced referential integrity and uniqueness constraints
+
+### 6. Validation & Testing
+Executed SQL validation scripts to verify:
+- Data completeness
+- Referential integrity
+- Duplicate handling
 
 ---
 
-## 📌 Author
+## 📊 Use Cases
 
-Data engineering project focused on **scalability, performance optimisation, and production-style ETL design**.
+- Analyse electricity demand vs pricing trends
+- Compare energy markets across countries
+- Perform time-series analysis
+- Build Power BI dashboards for insights
+
+---
+
+## 🚀 Project Strengths
+
+- End-to-end ETL pipeline (ingestion → warehouse → BI)
+- Handles large-scale, real-world datasets
+- Industry-standard dimensional modelling
+- Integration of Python, SQL, and BI tools
+- Strong focus on scalability and performance
+
+---
+
+## 📌 Future Improvements
+
+- Workflow orchestration (e.g. Airflow)
+- Cloud deployment (AWS / Azure)
+- Real-time or streaming ingestion
+- Enhanced Power BI dashboards & KPIs
