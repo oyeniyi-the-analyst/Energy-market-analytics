@@ -85,32 +85,31 @@ Implemented:
 - Monitored throughput and pipeline efficiency
 
 ---
-
 ## 📂 Project Structure
 
 Energy-market-analytics/
 │
 ├── Notebooks/
-│   ├── chunk_demand_and_price.ipynb
-│   ├── chunk_unpivoted_weather.ipynb
-│   ├── chunks_to_staging_multi_stream_loader.ipynb
-│   ├── etl_unpivot_weather.ipynb
-│   ├── stream_demand_and_price.ipynb
-│   ├── MULTI-STREAM LOADER (stg → tmp_cleaned).ipynb
-│   ├── fact_tables_loader.ipynb
-│   └── ETL FACT LOADER + DIAGNOSTIC CSV MODULE (INTEGRATED).ipynb
+│ ├── chunk_demand_and_price.ipynb
+│ ├── chunk_unpivoted_weather.ipynb
+│ ├── chunks_to_staging_multi_stream_loader.ipynb
+│ ├── etl_unpivot_weather.ipynb
+│ ├── stream_demand_and_price.ipynb
+│ ├── MULTI-STREAM LOADER (stg → tmp_cleaned).ipynb
+│ ├── fact_tables_loader.ipynb
+│ └── ETL FACT LOADER + DIAGNOSTIC CSV MODULE (INTEGRATED).ipynb
 │
 ├── sql/
-│   ├── 3.1_schema_create.sql
-│   ├── 3.2_staging_load.sql
-│   ├── 3.3_transform_dim.sql
-│   ├── 3.4_facts_load.sql
-│   └── 4.1_validation_tests.sql
+│ ├── 3.1_schema_create.sql
+│ ├── 3.2_staging_load.sql
+│ ├── 3.3_transform_dim.sql
+│ ├── 3.4_facts_load.sql
+│ └── 4.1_validation_tests.sql
 │
-├── data/ (not included – large datasets)
+├── data/
+│ └── (not included – large datasets)
+│
 └── README.md
-
-
 ---
 
 ## 🔄 Pipeline Breakdown
