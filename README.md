@@ -6,6 +6,10 @@ This project builds an end-to-end data pipeline that transforms raw electricity 
 
 It demonstrates practical experience in data engineering and analytics, integrating **Python, SQL, and Power BI** to deliver a complete solution from ingestion to reporting.
 
+
+<p align="center">
+  <img src="https://github.com/oyeniyi-the-analyst/Energy-market-analytics/blob/main/Dashboards/executive_overview.png?raw=true" width="800"/>
+</p>
 ---
 
 ## 🏗️ Architecture
