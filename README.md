@@ -1,12 +1,12 @@
 # ⚡ Energy Market Analytics (ETL Pipeline)
 
-## 📌 Overview
+## Overview
 
 This project builds an end-to-end data pipeline that transforms raw electricity demand, pricing, and weather datasets into a structured, analytics-ready data warehouse.
 
-It demonstrates practical experience in data engineering and analytics, integrating **Python, SQL, and Power BI** to deliver a complete solution from ingestion to reporting.
+It demonstrates practical experience in data engineering and analytics, integrating Python, SQL, and Power BI to deliver a complete solution from ingestion to reporting.
 
-## 🌍 Geographic Dashboard
+## Geographic Dashboard
 
 <p align="center">
   <img src="https://github.com/oyeniyi-the-analyst/Energy-market-analytics/blob/main/visuals/geographic_dashboard.png?raw=true" width="800"/>
@@ -15,7 +15,7 @@ It demonstrates practical experience in data engineering and analytics, integrat
 </p>
 ---
 
-## 🏗️ Architecture
+## Architecture
 Raw CSV Data
 ↓
 Python: Chunking & Unpivoting
@@ -29,11 +29,9 @@ Dimensional Model (dim_)
 Fact Tables (fact_)
 ↓
 Power BI Dashboard
-
-
 ---
 
-## ⚙️ Tech Stack
+## Tech Stack
 
 - **Python** (Pandas, PyMySQL, MySQL Connector)
 - **MySQL** (Relational Data Warehouse)
@@ -43,24 +41,24 @@ Power BI Dashboard
 
 ---
 
-## 🔥 Key Features
+## Key Features
 
 ### 📊 Scalable Data Processing
 - Processed large datasets using **chunking (500,000 rows per batch)**
 - Implemented memory-efficient ingestion workflows
 - Streamed data incrementally into MySQL
 
-### 🔄 Data Transformation
+### Data Transformation
 - Unpivoted wide-format weather datasets into analytical structure
 - Standardised datetime formats and country identifiers
 - Cleaned and validated raw data prior to loading
 
-### 🏗️ Multi-Stage ETL Pipeline
+### Multi-Stage ETL Pipeline
 - **Staging Layer (stg_*)** → raw ingestion
 - **Clean Layer (tmp_cleaned_*)** → validated structured data
 - **Warehouse Layer (dim_*, fact_*)** → analytics-ready model
 
-### 🧩 Dimensional Data Modelling
+###  Dimensional Data Modelling
 Star schema design:
 - `fact_demand`
 - `fact_price`
@@ -73,12 +71,12 @@ Implemented:
 - Indexing for performance
 - Deduplication rules
 
-### 🚀 Streaming & Incremental Loading
+### Streaming & Incremental Loading
 - Chunk-based processing for large-scale ingestion
 - Incremental loading using `raw_id`
 - Optimised batch inserts for performance
 
-### 🧪 Data Quality & Validation
+### Data Quality & Validation
 - Row count reconciliation across pipeline layers
 - Detected:
   - Missing timestamps
@@ -86,24 +84,21 @@ Implemented:
   - Duplicate records
 - SQL-based validation and diagnostic checks
 
-### ⚡ Performance Optimisation
+### Performance Optimisation
 - Used `LOAD DATA INFILE` for bulk ingestion
 - Indexed key columns for query performance
 - Monitored throughput and pipeline efficiency
 
 ---
 
-
----
-
-## 🔄 Pipeline Breakdown
+## Pipeline Breakdown
 
 ### 1. Data Preparation (Python)
 - Chunked large CSV files into manageable parts
 - Unpivoted weather datasets using Pandas
 - Prepared structured files for database ingestion
 
-### 2. Staging Layer (MySQL)
+### Staging Layer (MySQL)
 - Loaded raw data into `stg_*` tables
 - Applied initial validation, deduplication, and indexing
 
@@ -135,7 +130,7 @@ Executed SQL validation scripts to verify:
 
 ---
 
-## 📊 Use Cases
+## Use Cases
 
 - Analyse electricity demand vs pricing trends
 - Compare energy markets across countries
@@ -144,7 +139,7 @@ Executed SQL validation scripts to verify:
 
 ---
 
-## 🚀 Project Strengths
+## Project Strengths
 
 - End-to-end ETL pipeline (ingestion → warehouse → BI)
 - Handles large-scale, real-world datasets
@@ -154,7 +149,7 @@ Executed SQL validation scripts to verify:
 
 ---
 
-## 📌 Future Improvements
+## Future Improvements
 
 - Workflow orchestration (e.g. Airflow)
 - Cloud deployment (AWS / Azure)
