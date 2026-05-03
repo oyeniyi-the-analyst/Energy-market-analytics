@@ -1,4 +1,4 @@
-# ⚡ Energy Market Analytics (ETL Pipeline)
+# Energy Market Analytics (ETL Pipeline)
 
 ## Overview
 
